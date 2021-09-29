@@ -137,3 +137,14 @@ function getAverageAge(arr) {
   return Math.round(arr.reduce((sum, a) => sum + a.age, 0) / arr.length)
 }
 
+//Задача: Оставить уникальные элементы массива
+function unique(arr) {
+  let uniqueArr = []
+  for (let item of arr) {
+    if (!uniqueArr.includes(item)) {
+      uniqueArr.push(item)
+    }
+  }
+  return uniqueArr
+}
+
