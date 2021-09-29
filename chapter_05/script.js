@@ -48,7 +48,7 @@ function sumInput() {
 // Задача: подмассив наибольшей суммы
 function getMaxSubSum(arr) {
   let sum1 = 0,
-    sum2 = 0
+    sum2
   for (let i = 0; i < arr.length; i++) {
     sum2 = 0
     for (let j = i; j < arr.length; j++) {
@@ -60,3 +60,80 @@ function getMaxSubSum(arr) {
   }
   return sum1
 }
+
+// Задача: перевод строки в camelCase
+function camelize(str) {
+  let array = str.split('')
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] === '-') {
+      array[i + 1] = array[i + 1].toUpperCase()
+    }
+  }
+  return array.filter(item => item != '-').join('')
+}
+
+function camelizeTwo(str) {
+  return str.split('-').map((el, index) => {
+    if (index === 0) {
+      return el
+    } else {
+      return el[0].toUpperCase() + el.slice(1)
+    }
+  }).join('')
+}
+
+// Задача: Фильтрация по диапазону
+function filterRange(arr, a, b) {
+  return arr.filter(el => el >= a && el <= b)
+}
+
+// Задача: Фильрация по диапазону "на месте"
+function filterRangeInPlace(arr, a, b) {
+  for (let i = 0; i < arr.length; i++) {
+    // console.log(arr)
+    if (arr[i] < a || arr[i] > b) {
+      arr.splice(i, 1)
+      i -= 1
+    }
+  }
+}
+
+// Задача: Скопировать и отсортировать массив
+function copySorted(arr) {
+  return arr.slice().sort((a, b) => {
+    if (a > b) {
+      return 1
+    } else if (a < b) {
+      return -1
+    } else {
+      0
+    }
+  })
+}
+
+// Задача: Создать расширяемый калькулятор
+function Calculator() {
+  this.operations = {
+    '+': (a, b) => +a + +b,
+    '-': (a, b) => a - b
+  }
+  this.calculate = function (str) {
+    let arr = str.split(' ')
+    return this.operations[arr[1]](arr[0], arr[2])
+  }
+  this.addMethod = function (name, func) {
+    this.operations[name] = func
+  }
+}
+
+// Задача: Получить средний возраст
+let vasya = { name: "Вася", age: 25 }
+let petya = { name: "Петя", age: 30 }
+let masha = { name: "Маша", age: 29 }
+
+let arr = [vasya, petya, masha]
+
+function getAverageAge(arr) {
+  return Math.round(arr.reduce((sum, a) => sum + a.age, 0) / arr.length)
+}
+
