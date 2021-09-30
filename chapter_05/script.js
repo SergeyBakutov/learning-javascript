@@ -148,3 +148,79 @@ function unique(arr) {
   return uniqueArr
 }
 
+// Задача: Фильтрация уникальных элементов массива (через Set)
+function uniqueTwo(arr) {
+  return [...new Set(arr)]
+}
+
+// Задача: Отфильтруйте анаграммы
+function aclean(array) {
+  let map = new Map()
+
+  for (let el of array) {
+    map.set(el.toLowerCase().split('').sort().join(''), el)
+  }
+
+  return [...map.values()]
+}
+
+// Задача: Сумма свойств объекта (через Object.values() и цикл for..of)
+let salaries = {
+  'John': 100,
+  'Pete': 300,
+  'Mary': 250
+}
+
+function sumSalaries(obj) {
+  let sum = 0
+  if (obj === null) return sum
+  for (let salary of Object.values(obj)) {
+    sum += salary
+  }
+  return sum
+}
+
+// Задача: Максимальная зарплата
+let salariesTwo = {
+  'John': 100,
+  'Pete': 300,
+  'Mary': 250
+}
+
+function topSalary(obj) {
+  let sum = 0
+  let name = null
+
+  for (let [worker, salary] of Object.entries(obj)) {
+    if (salary > sum) {
+      sum = salary
+      name = worker
+    }
+  }
+
+  return name
+}
+
+// Задача: Покажите день недели
+function getWeekDay(date) {
+  let days = ['ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ']
+  return days[date.getDay()]
+}
+
+// Задача: Исключить обратные ссылки
+let room = {
+  number: 23
+}
+
+let meetup = {
+  title: "Совещание",
+  occupiedBy: [{ name: "Иванов" }, { name: "Петров" }],
+  place: room
+}
+
+console.log(JSON.stringify(meetup, function replacer(key, value) {
+  if (value === meetup) {
+    delete this[key]
+  }
+  return value
+}))
