@@ -21,6 +21,11 @@ function sumSalaries(obj) {
   return sum
 }
 
+// Второй вариант решения задачи (выше)
+function sumSalariesTwo(obj) {
+  return Object.values(obj).reduce((acum, cur) => acum += cur, 0)
+}
+
 //Задача: умножение числовых свойств
 let menu = {
   width: 200,
