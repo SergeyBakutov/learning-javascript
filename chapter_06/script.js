@@ -152,3 +152,67 @@ console.log(counter()) // 10
 counter.decrease()
 
 console.log(counter()) //10
+
+// Задача: Вывод каждую секунду
+function printNumbers(from, to) {
+  let counter = from
+  let timerId = setInterval(() => {
+    console.log(counter++)
+  }, 1000)
+  setTimeout(() => clearInterval(timerId), to * 1000)
+}
+
+// Второй способ - через рекурсивный setTimeout()
+function printNumbersOtherWay(from, to) {
+  let counter = from
+  let timerId = setTimeout(function tick() {
+    console.log(counter++)
+    if (counter > to) {
+      clearTimeout(timerId)
+    } else {
+      timerId = setTimeout(tick, 1000)
+    }
+  }, 1000)
+}
+
+// Задача: декоратор-шпион
+function work(a, b) {
+  console.log(a + b)
+}
+
+function spy(func) {
+  function f(...args) {
+    f.calls.push(args)
+    return func.apply(this, args)
+  }
+  f.calls = []
+  return f
+}
+
+work = spy(work)
+
+work(1, 2) // 3
+work(4, 5) // 9
+
+for (let args of work.calls) {
+  console.log('call:' + args.join())
+}
+
+// Задача: задерживающий декоратор
+function f(x) {
+  console.log(x)
+}
+
+function delay(func, ms) {
+  return function (...args) {
+    setTimeout(() => {
+      func.apply(this, args)
+    }, ms)
+  }
+}
+
+let f1000 = delay(f, 1000)
+let f1500 = delay(f, 1500)
+
+f1000("test")
+f1500("test")
