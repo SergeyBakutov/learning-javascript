@@ -87,3 +87,68 @@ function printReverseList(list) {
   }
   console.log(list.value)
 }
+
+// Задача: Сумма с помощью замыканий
+function sum(a) {
+  return function (b) {
+    return a + b
+  }
+}
+
+// Задача: Фильтрация с помощью функций (которые будут передаваться в filter)
+function inBetween(a, b) {
+  return function (elem) {
+    return elem >= a && elem <= b
+  }
+}
+
+function inArray(array) {
+  return function (elem) {
+    return array.includes(elem)
+  }
+}
+
+let arr = [1, 2, 3, 4, 5, 6, 7]
+console.log(arr.filter(inBetween(3, 6)))
+console.log(arr.filter(inArray([1, 2, 10])))
+
+// Задача: Сортировать по полю
+function byField(str) {
+  return function (a, b) {
+    return a[str] > b[str] ? 1 : -1
+  }
+}
+
+let users = [
+  { name: 'John', age: 20, surname: 'Johnson' },
+  { name: 'Pete', age: 18, surname: 'Peterson' },
+  { name: 'Ann', age: 19, surname: 'Hathaway' }
+]
+
+console.log(users.sort(byField('name')))
+console.log(users.sort(byField('age')))
+
+// Задача: Установка и уменьшение значения счетчика
+function makeCounter() {
+  function counter() {
+    return counter.count++
+  }
+  counter.count = 0
+  counter.set = function (value) {
+    counter.count = value
+  }
+  counter.decrease = function () {
+    counter.count--
+  }
+  return counter
+}
+
+let counter = makeCounter()
+console.log(counter()) // 0
+console.log(counter()) // 1
+counter.set(10)
+console.log(counter()) // 10
+
+counter.decrease()
+
+console.log(counter()) //10
