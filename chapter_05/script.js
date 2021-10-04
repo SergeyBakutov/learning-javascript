@@ -29,36 +29,37 @@ function truncate(str, maxLength) {
 // Задача: Сумма введенных чисел
 function sumInput() {
   let arr = []
-  let sum = 0
 
   while (true) {
+
     let num = prompt('Введите число для суммирования:')
-    if (num !== null && num !== '') {
+
+    if (num !== null && num !== '' && !!(+num / 1)) {
       arr.push(+num)
       continue
     }
     break
   }
-  for (let el of arr) {
-    sum += el
-  }
-  return sum
+  console.log(arr)
+  return arr.reduce((acum, cur) => acum + cur, 0)
 }
+
+console.log(sumInput())
 
 // Задача: подмассив наибольшей суммы
 function getMaxSubSum(arr) {
-  let sum1 = 0,
-    sum2
+  let resultMaxSum = 0,
+    newMaxSum
   for (let i = 0; i < arr.length; i++) {
-    sum2 = 0
+    newMaxSum = 0
     for (let j = i; j < arr.length; j++) {
-      sum2 += arr[j]
-      if (sum2 > sum1) {
-        sum1 = sum2
+      newMaxSum += arr[j]
+      if (newMaxSum > resultMaxSum) {
+        resultMaxSum = newMaxSum
       }
     }
   }
-  return sum1
+  return resultMaxSum
 }
 
 // Задача: перевод строки в camelCase
@@ -83,7 +84,7 @@ function camelizeTwo(str) {
 }
 
 // Задача: Фильтрация по диапазону
-function filterRange(arr, a, b) {
+function filterRange(arr, min, max) {
   return arr.filter(el => el >= a && el <= b)
 }
 
