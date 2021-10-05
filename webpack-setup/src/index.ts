@@ -10,7 +10,7 @@ p.textContent = person.name
 const root = document.querySelector('#root')
 root.append(p)
 
-const x: number = 32
+const x = 32
 console.log(x)
 
 const sum = (a: number, b: number): number => {

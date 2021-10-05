@@ -26,9 +26,7 @@ module.exports = {
       {
         test: /\.m?ts$/,
         exclude: /node_modules/,
-        use: {
-          loaders: ['babel-loader','ts-loader']
-        }
+        use: ['babel-loader','ts-loader', 'eslint-loader']
       }
     ]
   }
